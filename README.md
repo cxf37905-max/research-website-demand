@@ -22,6 +22,53 @@
 - 证据不足时明确保留未知，不编造用户、访谈、需求或市场结论。
 - 默认以简体中文输出，保留原始来源链接，方便复核。
 
+### 安装
+
+本仓库本身就是一个完整的 Codex Skill（`SKILL.md` 位于仓库根目录）。安装即把技能内容放入 Codex 的 skills 目录，Codex 会自动发现 `$CODEX_HOME/skills/<技能名>/SKILL.md`（`CODEX_HOME` 未设置时默认 `~/.codex`）。
+
+推荐方式（仓库自带安装脚本）：
+
+```bash
+git clone https://github.com/cxf37905-max/research-website-demand.git
+cd research-website-demand
+./install.sh
+```
+
+脚本默认安装到全局 `~/.codex/skills/research-website-demand/`，且只复制技能内容（`SKILL.md`、`agents/`、`references/`），不会夹带 README、`.git`、`install.sh` 等仓库文件。
+
+其它方式：
+
+- 项目级安装（只对当前项目生效）：`./install.sh --dest <项目>/.codex/skills`
+- 覆盖已有安装：`./install.sh --force`
+- 手动安装：
+
+```bash
+mkdir -p ~/.codex/skills
+git clone https://github.com/cxf37905-max/research-website-demand.git ~/.codex/skills/research-website-demand
+rm -rf ~/.codex/skills/research-website-demand/.git
+```
+
+- 用 Codex 官方安装脚本（会一并复制 README 等仓库文件到技能目录）：
+
+```bash
+python3 "$CODEX_HOME/skills/.system/skill-installer/scripts/install-skill-from-github.py" \
+  --repo cxf37905-max/research-website-demand --path . --name research-website-demand
+```
+
+安装校验：
+
+```bash
+test -f ~/.codex/skills/research-website-demand/SKILL.md && echo "已安装"
+```
+
+安装完成后，在下一轮对话中用 `$research-website-demand` 即可触发。
+
+卸载：
+
+```bash
+rm -rf ~/.codex/skills/research-website-demand
+```
+
 ### 适用提问示例
 
 ```text
@@ -49,6 +96,53 @@ Give it a website or product URL when you need to understand who the real users 
 - Uses only lawfully accessible public information; it does not log in, bypass paywalls or CAPTCHAs, or control a browser.
 - States uncertainty when evidence is insufficient rather than inventing users, interviews, demand, or market conclusions.
 - Produces Simplified Chinese by default and includes source links for review.
+
+### Installation
+
+This repository is itself a complete Codex skill (`SKILL.md` sits at the repo root). Installing it means placing the skill contents into Codex's skills directory, where Codex auto-discovers `$CODEX_HOME/skills/<skill-name>/SKILL.md` (`CODEX_HOME` defaults to `~/.codex` when unset).
+
+Recommended (bundled install script):
+
+```bash
+git clone https://github.com/cxf37905-max/research-website-demand.git
+cd research-website-demand
+./install.sh
+```
+
+The script installs to the global `~/.codex/skills/research-website-demand/` by default and copies only the skill contents (`SKILL.md`, `agents/`, `references/`), leaving repo-only files such as `README.md`, `.git`, and `install.sh` behind.
+
+Other options:
+
+- Project-local install: `./install.sh --dest <project>/.codex/skills`
+- Overwrite an existing install: `./install.sh --force`
+- Manual install:
+
+```bash
+mkdir -p ~/.codex/skills
+git clone https://github.com/cxf37905-max/research-website-demand.git ~/.codex/skills/research-website-demand
+rm -rf ~/.codex/skills/research-website-demand/.git
+```
+
+- Using Codex's official installer (copies repo files such as README into the skill dir too):
+
+```bash
+python3 "$CODEX_HOME/skills/.system/skill-installer/scripts/install-skill-from-github.py" \
+  --repo cxf37905-max/research-website-demand --path . --name research-website-demand
+```
+
+Verify the install:
+
+```bash
+test -f ~/.codex/skills/research-website-demand/SKILL.md && echo "installed"
+```
+
+After installing, trigger it on your next turn with `$research-website-demand`.
+
+Uninstall:
+
+```bash
+rm -rf ~/.codex/skills/research-website-demand
+```
 
 ### Example prompt
 
